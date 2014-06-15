@@ -6,10 +6,16 @@ app.controller "main", ($scope) =>
   $scope.tasks = []
   $scope.completeTasks = 0;
 
+
+
+
   socket.on "monitor", (data) =>
     console.log data
     findWorker = (socket) =>
-      $scope.workers.filter((w) => w.socket == socket)[0]
+      worker = $scope.workers.filter((w) => w.socket == socket)[0]
+      $scope.workers.unshift({socket: socket}) if not worker
+      worker
+
 
     $scope.$apply () =>
       if data.event=="workerAnnounced"
@@ -38,9 +44,13 @@ app.controller "main", ($scope) =>
         worker = findWorker(data.socket)
         if !worker
           worker = {socket: data.socket}
-          $scope.workers.unshift(worker)
-          worker.state = "idle"
-          worker.task = data.task
+        worker.state = "idle"
+        worker.task = data.task
+        worker.task = null
+        worker.log = null
+
+    $(".state_disconected").fadeOut('slow') #<--- I KOW BUT DONT CARE!!!!
+    $(".state_").hide() #<--- I KOW BUT DONT CARE!!!!
 
 
 

@@ -43,7 +43,7 @@ class WorkerPool
         worker.working()
         workerFound(workers[0])
       else
-        setTimeout((() => @getNextIdleWorker(workerFound)), 10000)
+        setTimeout((() => @getNextIdleWorker(workerFound)), 500)
 
   removeWorker: (socket) =>
     worker = @getWorker(socket)
