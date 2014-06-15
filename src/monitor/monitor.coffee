@@ -6,56 +6,54 @@ app.controller "main", ($scope) =>
   $scope.tasks = []
   $scope.completeTasks = 0;
 
+  class MainController
+    constructor: ->
+      socket.on "monitor", (data) =>
+        console.log data
+        $scope.$apply () =>
+          @[data.event](data) unless  @[data.event] == undefined
+        $(".state_disconected").fadeOut('slow') #<--- I KOW BUT DONT CARE!!!!
+        $(".state_").hide()
+        $(".state_working,.state_idle").show()
 
+    workerAnnounced: (data) =>
+      $scope.workers.unshift({socket: data.socket, state: "idle"})
 
-
-  socket.on "monitor", (data) =>
-    console.log data
-    findWorker = (socket) =>
-      worker = $scope.workers.filter((w) => w.socket == socket)[0]
-      $scope.workers.unshift({socket: socket}) if not worker
-      worker
-
-
-    $scope.$apply () =>
-      if data.event=="workerAnnounced"
-        $scope.workers.unshift({socket: data.socket, state: "idle"})
-      else if data.event=="workerDisconnect"
-        w = findWorker(data.socket)
+    workerDisconnect: (data) =>
+        w = @findWorker(data.socket)
         if w
           w.state = "disconected"
           w.task = null
           w.log = null
-      else if data.event=="taskQueued"
+
+    taskQueued : (data) =>
         $scope.tasks.push(data)
-      else if data.event=="taskPickedUp"
-        worker = findWorker(data.socket)
+
+    taskPickedUp : (data) =>
+        worker = @findWorker(data.socket)
         if !worker
           worker = {socket: data.socket}
           $scope.workers.unshift(worker)
         worker.state = "working"
         worker.task = data.task
-      else if data.event=="taskLog"
-        worker = findWorker(data.socket)
+
+    taskLog: (data) =>
+        worker = @findWorker(data.socket)
         if worker
           worker.log = data.message
-      else if data.event=="taskDone"
+
+    taskDone: (data) =>
         $scope.completeTasks = $scope.completeTasks+1;
-        worker = findWorker(data.socket)
+        worker = @findWorker(data.socket)
         if !worker
           worker = {socket: data.socket}
         worker.state = "idle"
-        worker.task = data.task
         worker.task = null
         worker.log = null
 
-    $(".state_disconected").fadeOut('slow') #<--- I KOW BUT DONT CARE!!!!
-    $(".state_").hide() #<--- I KOW BUT DONT CARE!!!!
+    findWorker : (socket) =>
+      worker = $scope.workers.filter((w) => w.socket == socket)[0]
+      $scope.workers.unshift({socket: socket}) if not worker
+      worker
 
-
-
-
-
-
-#socket.on "monitor", (data) =>  console.log(data)
-window.socket = socket
+  new MainController()
