@@ -17,7 +17,7 @@ Monitoring
 
 
 ![idle](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/idle.png)
-![connecting](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/connected.png)
+![connecting](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/connectedb.png)
 ![disconnected](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/disconnected.png)
 
 
