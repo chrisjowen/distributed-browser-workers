@@ -3,6 +3,12 @@ Use the browser as a distributed worker :)
 
 This is just a hacky play project to see if I could use socket.io to push jobs to various browsers to independently process some work.
 
+![idle](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/idle.png)
+![connecting](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/connectedb.png)
+![disconnected](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/disconnected.png)
+
+
+
 Running it
 ----------------------
 
@@ -15,10 +21,6 @@ Starting a worker
 Monitoring
 - visit: http://localhost:9000/monitor.html. See whats happening :)
 
-
-![idle](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/idle.png)
-![connecting](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/connectedb.png)
-![disconnected](https://raw.githubusercontent.com/chrisjowen/distributed-browser-workers/master/src/example/img/disconnected.png)
 
 
 Testing it
