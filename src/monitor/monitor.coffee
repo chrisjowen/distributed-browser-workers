@@ -16,7 +16,10 @@ app.controller "main", ($scope) =>
         $scope.workers.unshift({socket: data.socket, state: "idle"})
       else if data.event=="workerDisconnect"
         w = findWorker(data.socket)
-        w.state = "disconected" if w
+        if w
+          w.state = "disconected"
+          w.task = null
+          w.log = null
       else if data.event=="taskQueued"
         $scope.tasks.push(data)
       else if data.event=="taskPickedUp"

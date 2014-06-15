@@ -1,42 +1,45 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
     <link href='//fonts.googleapis.com/css?family=Fjalla+One|Average' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .state_working {
+            background: lightgreen;
+        }
+        .state_idle {
+            background: lightyellow;
+        }
+        .state_disconected{
+            background: indianred;
+        }
+    </style>
 </head>
 <body ng-app="monitor">
 <div ng-view></div>
-
-
-<div ng-controller="main">
-
+<div ng-controller="main" class="container">
     <h1>{{completeTasks}} Tasks Complete</h1>
-    <h3>{{tasksPerSecond}} Tasks/Second</h1>
-    <div >
-        <table class="table">
-            <tr>
-                <th>Name</th>
-                <th>State</th>
-                <th>Current Task</th>
-                <th>Log</th>
-            </tr>
-            <tr ng-repeat="worker in workers">
-                <td>{{worker.socket}}</td>
-                <td>{{worker.state}}</td>
-                <td>{{worker.task}}</td>
-                <td>{{worker.log}}</td>
-            </tr>
-        </table>
-    </div>
-
-
-
-    <script src="bower_components/angular/angular.js"></script>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>Current Task</th>
+            <th>Log</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="worker in workers" class="state_{{worker.state}}">
+            <td>{{worker.socket}}</td>
+            <td>{{worker.state}}</td>
+            <td>{{worker.task}}</td>
+            <td>{{worker.log}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/socket.io-client/socket.io.js"></script>
 <script src="js/monitor.js"></script>
-
-</div>
-
 </body>
 </html>

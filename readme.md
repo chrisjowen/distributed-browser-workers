@@ -15,6 +15,10 @@ Starting a worker
 Monitoring
 - visit: http://localhost:9000/monitor.html. See whats happening :)
 
+
+![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
+
+
 Testing it
 ------------
 
