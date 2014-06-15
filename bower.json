@@ -1,0 +1,21 @@
+{
+  "name": "bQueue",
+  "version": "0.0.0",
+  "authors": [
+    "Chris Owen <chris.j.owen@hotmail.co.uk>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.14",
+    "socket.io-client": "~1.0.4",
+    "angular": "~1.2.18",
+    "angular-route": "~1.2.18"
+  }
+}
